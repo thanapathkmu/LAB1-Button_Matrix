@@ -65,7 +65,8 @@ PortPin L[4] =
 		{GPIOB,GPIO_PIN_5},
 		{GPIOB,GPIO_PIN_4}
 };
-
+//Variable for stack value from button matrix
+uint16_t ButtonMatrix = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -121,6 +122,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
   }
   /* USER CODE END 3 */
 }
@@ -270,6 +272,22 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void ReadMatrixButton_1Row() {
+    static uint8_t X = 0;
+    register int i;
+    for (i = 0; i < 4; i++) {
+        if (HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN)) {
+            ButtonMatrix &= ~(1 << (X * 4 + i));
+        } else {
+            ButtonMatrix |= 1 << (X * 4 + i);
+        }
+    }
+    HAL_GPIO_WritePin(R[X].PORT, R[X].PIN, 1);
+    HAL_GPIO_WritePin(R[(X + 1) % 4].PORT, R[(X + 1) % 4].PIN, 0);
+    X++;
+    X %= 4;
+}
 
 /* USER CODE END 4 */
 

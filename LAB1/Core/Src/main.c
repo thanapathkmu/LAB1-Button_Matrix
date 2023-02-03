@@ -112,7 +112,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  void ReadMatrixButton_1Row();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -123,6 +123,13 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+	  //Call Function every 10milli seconds = 100Hz
+	  static uint32_t timestamp = 0;
+	  if(HAL_GetTick()>=timestamp)
+	  {
+		  timestamp = HAL_GetTick() + 10;
+		  ReadMatrixButton_1Row();
+	  }
   }
   /* USER CODE END 3 */
 }
@@ -274,8 +281,10 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 void ReadMatrixButton_1Row() {
+	//Define Variable
     static uint8_t X = 0;
     register int i;
+    //Read
     for (i = 0; i < 4; i++) {
         if (HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN)) {
             ButtonMatrix &= ~(1 << (X * 4 + i));
@@ -283,6 +292,7 @@ void ReadMatrixButton_1Row() {
             ButtonMatrix |= 1 << (X * 4 + i);
         }
     }
+    //Set
     HAL_GPIO_WritePin(R[X].PORT, R[X].PIN, 1);
     HAL_GPIO_WritePin(R[(X + 1) % 4].PORT, R[(X + 1) % 4].PIN, 0);
     X++;

@@ -67,6 +67,11 @@ PortPin L[4] =
 };
 //Variable for stack value from button matrix
 uint16_t ButtonMatrix = 0;
+//Variable State Machine
+uint8_t state = 0;
+int button_state = 0;
+int last_button_state = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -130,6 +135,140 @@ int main(void)
 		  timestamp = HAL_GetTick() + 10;
 		  ReadMatrixButton_1Row();
 	  }
+
+	  //Check Button State
+	  if(ButtonMatrix == 0)
+	  {
+		  button_state = 0;
+	  }
+	  else if(ButtonMatrix != 0)
+	  {
+		  button_state = 1;
+	  }
+
+	  //State Machine
+	  switch(state)
+	  {
+	  	  case 0:
+	  		  if(last_button_state == 0 && ButtonMatrix == 512)
+	  		  {
+	  			  state = 1;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 1:
+	  		  if(last_button_state == 0 && ButtonMatrix == 2)
+	  		  {
+	  			  state = 2;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 2:
+	  		  if(last_button_state == 0 && ButtonMatrix == 2048)
+	  		  {
+	  			  state = 3;
+	  		  }
+	  		  else
+	  		  {
+	  		      state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 3:
+	  		  if(last_button_state == 0 && ButtonMatrix == 2)
+	  		  {
+	  			  state = 4;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 4:
+	  		  if(last_button_state == 0 && ButtonMatrix == 8)
+	  		  {
+	  			  state = 5;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 5:
+	  		  if(last_button_state == 0 && ButtonMatrix == 8)
+	  		  {
+	  		  	  state = 6;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 6:
+	  		  if(last_button_state == 0 && ButtonMatrix == 8)
+	  		  {
+	  		  	   state = 7;
+	  		  }
+	  		  else
+	  		  {
+	  			   state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 7:
+	  		  if(last_button_state == 0 && ButtonMatrix == 512)
+	  		  {
+	  			  state = 8;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 8:
+	  		  if(last_button_state == 0 && ButtonMatrix == 8)
+	  		  {
+	  			  state = 9;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+
+	  	  case 9:
+	  		  if(last_button_state == 0 && ButtonMatrix == 32768)
+	  		  {
+	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+	  			  state = 99;
+	  		  }
+	  		  else
+	  		  {
+	  			  state = 99;
+	  		  }
+	  		  break;
+	  	//else case
+	  	  case 99:
+	  		  if(last_button_state == 0 && ButtonMatrix == 512)
+	  		  {
+	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+	  			  state = 1;
+	  		  }
+	  		  break;
+	  }
+	  last_button_state = button_state;
   }
   /* USER CODE END 3 */
 }
@@ -260,13 +399,13 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : PA10 */
   GPIO_InitStruct.Pin = GPIO_PIN_10;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB3 PB4 PB5 */
   GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB6 */

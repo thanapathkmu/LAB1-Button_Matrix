@@ -68,7 +68,7 @@ PortPin L[4] =
 //Variable for stack value from button matrix
 uint16_t ButtonMatrix = 0;
 //Variable State Machine
-uint8_t state = 0;
+int state = 0;
 int button_state = 0;
 int last_button_state = 0;
 
@@ -158,7 +158,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 512 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -173,7 +173,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		else if(last_button_state == 0 && (ButtonMatrix != 2 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -188,7 +188,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 2048 || ButtonMatrix != 4069))
 	  		  {
 	  		      state = 99;
 	  		  }
@@ -203,7 +203,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 2 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -218,7 +218,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -233,7 +233,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -248,7 +248,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
 	  		  {
 	  			   state = 99;
 	  		  }
@@ -263,7 +263,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 512 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -278,7 +278,7 @@ int main(void)
 	  		  {
 	  			state =98;
 	  		  }
-	  		  else
+	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -294,7 +294,7 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else
+	  		else if(last_button_state == 0 && (ButtonMatrix != 32768 || ButtonMatrix != 4069))
 	  		  {
 	  			  state = 99;
 	  		  }

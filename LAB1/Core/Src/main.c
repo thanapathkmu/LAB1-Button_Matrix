@@ -145,7 +145,6 @@ int main(void)
 	  {
 		  button_state = 1;
 	  }
-
 	  //State Machine
 	  switch(state)
 	  {
@@ -156,9 +155,9 @@ int main(void)
 	  		  }
 	  		  else if(last_button_state == 0 && ButtonMatrix == 4096)
 	  		  {
-	  			state = 98;
+	  			  state = 98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 512 || ButtonMatrix != 4069))
+	  		  else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 512 || ButtonMatrix != 4096))
 	  		  {
 	  			  state = 99;
 	  		  }
@@ -173,14 +172,14 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		else if(last_button_state == 0 && (ButtonMatrix != 2 || ButtonMatrix != 4069))
+	  		  else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 2 || ButtonMatrix != 4096))
 	  		  {
 	  			  state = 99;
 	  		  }
 	  		  break;
 
 	  	  case 2:
-	  		  if(last_button_state == 0 && ButtonMatrix == 2048)
+	  		  if(last_button_state == 0 && ButtonMatrix == 1024)
 	  		  {
 	  			  state = 3;
 	  		  }
@@ -188,10 +187,10 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 2048 || ButtonMatrix != 4069))
-	  		  {
-	  		      state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 1024 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
 
 	  	  case 3:
@@ -203,10 +202,10 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 2 || ButtonMatrix != 4069))
-	  		  {
-	  			  state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 2 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
 
 	  	  case 4:
@@ -218,14 +217,14 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
-	  		  {
-	  			  state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 8 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
 
 	  	  case 5:
-	  		  if(last_button_state == 0 && ButtonMatrix == 8)
+	  		  if(last_button_state == 0 && ButtonMatrix == 32)
 	  		  {
 	  		  	  state = 6;
 	  		  }
@@ -233,58 +232,87 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
-	  		  {
-	  			  state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 32 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
 
 	  	  case 6:
 	  		  if(last_button_state == 0 && ButtonMatrix == 8)
 	  		  {
-	  		  	   state = 7;
+	  			  state = 7;
 	  		  }
 	  		  else if(last_button_state == 0 && ButtonMatrix == 4096)
 	  		  {
-	  			state = 98;
+	  			  state =98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
-	  		  {
-	  			   state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 8 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
 
 	  	  case 7:
-	  		  if(last_button_state == 0 && ButtonMatrix == 512)
+	  		  if(last_button_state == 0 && ButtonMatrix == 8)
 	  		  {
-	  			  state = 8;
+	  		  	   state = 8;
 	  		  }
 	  		  else if(last_button_state == 0 && ButtonMatrix == 4096)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 512 || ButtonMatrix != 4069))
-	  		  {
-	  			  state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 8 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
-
 	  	  case 8:
 	  		  if(last_button_state == 0 && ButtonMatrix == 8)
+	  		  	  {
+	  			  	  state = 9;
+	  		  	  }
+	  		 else if(last_button_state == 0 && ButtonMatrix == 4096)
+	  			{
+	  				state = 98;
+	  			}
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 8 || ButtonMatrix != 4096))
+	  			{
+	  			 	state = 99;
+	  			}
+	  		break;
+
+	  	  case 9:
+	  		  if(last_button_state == 0 && ButtonMatrix == 512)
 	  		  {
-	  			  state = 9;
+	  			  state = 10;
+	  		  }
+	  		  else if(last_button_state == 0 && ButtonMatrix == 4096)
+	  		  {
+	  			state = 98;
+	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 512 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
+	  		  break;
+
+	  	  case 10:
+	  		  if(last_button_state == 0 && ButtonMatrix == 8)
+	  		  {
+	  			  state = 11;
 	  		  }
 	  		  else if(last_button_state == 0 && ButtonMatrix == 4096)
 	  		  {
 	  			state =98;
 	  		  }
-	  		  else if(last_button_state == 0 && (ButtonMatrix != 8 || ButtonMatrix != 4069))
-	  		  {
-	  			  state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 8 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
 
-	  	  case 9:
+	  	  case 11:
 	  		  if(last_button_state == 0 && ButtonMatrix == 32768)
 	  		  {
 	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
@@ -294,10 +322,10 @@ int main(void)
 	  		  {
 	  			state = 98;
 	  		  }
-	  		else if(last_button_state == 0 && (ButtonMatrix != 32768 || ButtonMatrix != 4069))
-	  		  {
-	  			  state = 99;
-	  		  }
+	  		else if(last_button_state == 0 && button_state == 1 && (ButtonMatrix != 32768 || ButtonMatrix != 4096))
+	  			  		  {
+	  			  			  state = 99;
+	  			  		  }
 	  		  break;
 
 	  	  case 98:
